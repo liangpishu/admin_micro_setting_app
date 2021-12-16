@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
-import { HashRouter, Redirect, Route, Switch, useLocation } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch, useLocation } from "react-router-dom";
 import { AccountService } from "../service/user";
 import { LoginPath } from "../consts/path/login";
+import { Login } from "../ui/page/login";
 
 const RouterEntry = () => {
   return (
     <React.Suspense fallback={<div/>}>
-      <HashRouter>
+      <BrowserRouter>
         <Route>
           <Switch>
             <Route path={LoginPath.LOGIN} render={() => {
-              return <>
-                登录
-              </>;
+              return <Login/>;
             }}/>
             <Route path={"/*"} render={() => {
               if (AccountService.getAuthKey()) {
@@ -23,11 +22,10 @@ const RouterEntry = () => {
               }
               return <Redirect to={LoginPath.LOGIN}/>;
             }}>
-
             </Route>
           </Switch>
         </Route>
-      </HashRouter>
+      </BrowserRouter>
     </React.Suspense>
   );
 };
