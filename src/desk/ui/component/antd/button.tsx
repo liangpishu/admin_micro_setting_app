@@ -1,8 +1,8 @@
 import { Button } from "antd";
 import { FC } from "react";
-import { BaseButtonProps } from "antd/lib/button/button";
+import { ButtonProps } from "antd/lib/button/button";
 
-type TProps = {} & BaseButtonProps;
+type TProps = {} & ButtonProps;
 
 /**
  * primary button

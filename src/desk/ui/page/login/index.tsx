@@ -7,9 +7,15 @@ import { Col, Row } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { FItem } from "../../component/antd/f-item";
 import { PButton } from "../../component/antd/button";
+import Http from "../../../http";
 
 export const Login = () => {
   const [form] = useForm();
+  const onFinish = (values: any) => {
+    Http.get("/json/mastertable/title.json").then((res) => {
+      console.log(res, "rs");
+    });
+  };
   return <LoginStyle>
     <Row className={"login-row"}>
       <Col span={12} className={"login-left"}>
@@ -18,7 +24,7 @@ export const Login = () => {
           repudiandae temporibus voluptatibus.</p>
       </Col>
       <Col span={12} className={"login-right"}>
-        <FForm className={"login-form"} form={form}>
+        <FForm onFinish={onFinish} className={"login-form"} form={form}>
           <FText
             inputProps={{
               placeholder: MyLangUtil.get("账号"),
@@ -33,7 +39,7 @@ export const Login = () => {
             }}
             propName={"pwd"}/>
           <FItem>
-            <PButton className={"login-form-button"}>
+            <PButton htmlType="submit" className={"login-form-button"}>
               {MyLangUtil.get("登录")}
             </PButton>
           </FItem>
