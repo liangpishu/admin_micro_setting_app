@@ -24,14 +24,14 @@ export const Login = () => {
               placeholder: MyLangUtil.get("账号"),
               prefix: <UserOutlined className="site-form-item-icon"/>,
             }}
-            propName={"a"}/>
+            propName={"account"}/>
           <FText
             inputProps={{
               placeholder: MyLangUtil.get("密码"),
               prefix: <LockOutlined className="site-form-item-icon"/>,
               type: "password",
             }}
-            propName={"ab"}/>
+            propName={"pwd"}/>
           <FItem>
             <PButton className={"login-form-button"}>
               {MyLangUtil.get("登录")}
