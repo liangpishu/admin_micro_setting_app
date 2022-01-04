@@ -1,22 +1,23 @@
-import { Select } from "antd";
+import { Radio } from "antd";
 import { FormItemProps } from "antd/lib/form/FormItem";
 import { IOptionItem, PrefixPath, PropPath } from "../../../type";
 import { FC, useMemo } from "react";
 import { FItem } from "./f-item";
-import { SelectProps } from "antd/lib/select";
 import MyLodashUtil from "../../../utils/my-lodash-util";
+import { RadioProps } from "antd/lib/radio/interface";
 import { useMasterTable } from "../../hooks/use-master-table";
 
-const { Option } = Select;
 
-type TFISelect = {
-  selectProps?: SelectProps<any>;
+type TFIRadio = {
+  radioProps?: RadioProps;
   options?: IOptionItem[],
   tableName?: string;
+  type?: "button"
   filter?: (props: { options: IOptionItem[] }) => IOptionItem[]
 } & FormItemProps & PrefixPath & PropPath;
-export const FSelect: FC<TFISelect> = (props) => {
-  const { selectProps, tableName, options, filter, ...rest } = props;
+
+export const FRadio: FC<TFIRadio> = (props) => {
+  const { radioProps, tableName, options, filter, ...rest } = props;
   const { data } = useMasterTable(tableName);
 
   const getOptions = useMemo(() => {
@@ -32,28 +33,32 @@ export const FSelect: FC<TFISelect> = (props) => {
     return newOptions;
   }, [data, options, filter]);
 
-  return <FSelectBase options={getOptions} {...rest} />;
+  return <FRadioBase options={getOptions} {...rest} />;
 };
 
-type TFISelectBase = {
-  selectProps?: SelectProps<any>;
-  options?: IOptionItem[],
-} & Omit<TFISelect, "tableName" | "filter">;
+type TFIRadioBase = {} & Omit<TFIRadio, "tableName" | "filter">;
 
-const FSelectBase: FC<TFISelectBase> = (props) => {
-  const { selectProps, options = [], ...rest } = props;
+const FRadioBase: FC<TFIRadioBase> = (props) => {
+  const { radioProps, options = [], type, ...rest } = props;
+  const isButton = useMemo(() => {
+    return type == "button";
+  }, [type]);
   return <FItem {...rest}>
-    <Select
-      style={{ width: "100%" }}
-      {...selectProps}
+    <Radio.Group
+      {...radioProps}
     >
       {
         options.map((item) => {
-          return <Option value={item.id} title={item.text} data-origin={item}>
-            {item.text}
-          </Option>;
+          return isButton ?
+            <Radio.Button value={item.id} key={item.id} data-origin={item}>
+              {item.text}
+            </Radio.Button>
+            :
+            <Radio value={item.id} key={item.id} data-origin={item}>
+              {item.text}
+            </Radio>;
         })
       }
-    </Select>
+    </Radio.Group>
   </FItem>;
 };
