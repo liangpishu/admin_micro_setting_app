@@ -1,26 +1,30 @@
-import React, { useEffect } from "react";
+import React, { lazy, useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch, useLocation } from "react-router-dom";
 import { AccountService } from "../service/user";
 import { LoginPath } from "../consts/path/login";
-import { Login } from "../ui/page/login";
+import MyLangUtil from "../utils/my-lang-util";
+
+const Entry = lazy(() => import("../ui/page/entry"));
+const Login = lazy(() => import("../ui/page/login"));
+
 
 const RouterEntry = () => {
   return (
-    <React.Suspense fallback={<div/>}>
+    <React.Suspense fallback={<div>{MyLangUtil.get("Loading...")}</div>}>
       <BrowserRouter>
         <Route>
           <Switch>
             <Route path={LoginPath.LOGIN} render={() => {
-              return <Login/>;
-            }}/>
+              return <Login />;
+            }} />
             <Route path={"/*"} render={() => {
               if (AccountService.getAuthKey()) {
                 return <>
-                  <ScrollToTop/>
-                  已登录
+                  <ScrollToTop />
+                  <Entry />
                 </>;
               }
-              return <Redirect to={LoginPath.LOGIN}/>;
+              return <Redirect to={LoginPath.LOGIN} />;
             }}>
             </Route>
           </Switch>

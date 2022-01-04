@@ -3,18 +3,31 @@ import FForm from "../../component/antd/f-form";
 import { FText } from "../../component/antd/f-text";
 import MyLangUtil from "../../../utils/my-lang-util";
 import { LoginStyle } from "../../style/login-style";
-import { Col, Row } from "antd";
+import { Col, message, Row } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { FItem } from "../../component/antd/f-item";
 import { PButton } from "../../component/antd/button";
-import Http from "../../../http";
+import { MyStorage } from "../../../storage";
+import { useHistory } from "react-router";
+import { UserInfo } from "../../../consts/user-info/user-info";
+import MyLodashUtil from "../../../utils/my-lodash-util";
+import Message from "../../../service/message";
 
-export const Login = () => {
+const Login = () => {
   const [form] = useForm();
+  const history = useHistory();
   const onFinish = (values: any) => {
-    Http.get("/json/mastertable/title.json").then((res) => {
-      console.log(res, "rs");
-    });
+    const findUser = UserInfo.find((item) => item.userName === values.userName && item.pwd === values.pwd);
+    if (MyLodashUtil.isEmpty(findUser)) {
+      Message.error({
+        content: MyLangUtil.get("账号或密码错误！")
+      });
+    } else {
+      MyStorage.Account.set("userName", values.userName);
+      MyStorage.Account.set("authKey", values.userName);
+      message.success("登录成功！");
+      history.replace("/");
+    }
   };
   return <LoginStyle>
     <Row className={"login-row"}>
@@ -28,16 +41,16 @@ export const Login = () => {
           <FText
             inputProps={{
               placeholder: MyLangUtil.get("账号"),
-              prefix: <UserOutlined className="site-form-item-icon"/>,
+              prefix: <UserOutlined className="site-form-item-icon" />,
             }}
-            propName={"account"}/>
+            propName={"userName"} />
           <FText
             inputProps={{
               placeholder: MyLangUtil.get("密码"),
-              prefix: <LockOutlined className="site-form-item-icon"/>,
+              prefix: <LockOutlined className="site-form-item-icon" />,
               type: "password",
             }}
-            propName={"pwd"}/>
+            propName={"pwd"} />
           <FItem>
             <PButton htmlType="submit" className={"login-form-button"}>
               {MyLangUtil.get("登录")}
@@ -48,3 +61,5 @@ export const Login = () => {
     </Row>
   </LoginStyle>;
 };
+
+export default Login;

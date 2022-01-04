@@ -4,7 +4,7 @@ class MyStringUtilClass {
   }
 
   isNotBlank(value?: string) {
-    return value;
+    return !!value;
   }
 
 }
