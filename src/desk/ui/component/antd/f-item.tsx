@@ -6,7 +6,7 @@ import MyPathUtil from "../../../utils/my-path-util";
 
 type TFItem = {} & FormItemProps & PrefixPath & PropPath
 export const FItem: FC<TFItem> = (props) => {
-  const { propName, prefix, name, required, rules, ...reset } = props;
+  const { propName, prefix, name, required, rules, ...rest } = props;
   const nameReal = MyPathUtil.merge(prefix, propName);
   const rulesReal = (rules || []).concat({
     required,
@@ -14,7 +14,7 @@ export const FItem: FC<TFItem> = (props) => {
   });
   return <Form.Item
     name={nameReal}
-    {...reset}
+    {...rest}
     rules={rulesReal}
   />;
 };

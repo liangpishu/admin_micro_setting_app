@@ -6,6 +6,10 @@ class MyLodashUtilClass {
     return _.get(object, path, defaultValue);
   }
 
+  isEmpty(value: any): boolean {
+    return _.isEmpty(value);
+  }
+
   flattenDeep(array: any) {
     return _.flattenDeep(array);
   }

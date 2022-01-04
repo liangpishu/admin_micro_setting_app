@@ -8,6 +8,9 @@ class MyArrayUtilClass {
     return [];
   }
 
+  isEmpty(array: any[]) {
+    return
+  }
 }
 
 const  MyArrayUtil = new MyArrayUtilClass()

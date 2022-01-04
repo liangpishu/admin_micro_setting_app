@@ -9,9 +9,9 @@ type TFIText = {
   inputProps?: InputProps
 } & FormItemProps & PrefixPath & PropPath;
 export const FText: FC<TFIText> = (props) => {
-  const { inputProps, ...reset } = props;
+  const { inputProps, ...rest } = props;
 
-  return <FItem {...reset}>
+  return <FItem {...rest}>
     <Input {...inputProps}/>
   </FItem>;
 };
