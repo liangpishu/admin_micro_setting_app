@@ -29,7 +29,13 @@ class Styles {
       #root{
         width:100%;
         height: 100%;
-        border: 1px solid transparent;
+        ::after {
+          content: "";
+          clear: both;
+          display:block;
+          height:0;
+          visibility:hidden;
+        }
       }   
 	  `;
   }
