@@ -1,15 +1,24 @@
-import React from "react";
+import React, { lazy } from "react";
 import styled from "styled-components";
-import { DeskPageFooter } from "../desk-page/desk-page-footer";
-import { DeskPageHeader } from "../desk-page/desk-page-header";
-import { DeskPageContent } from "../desk-page/desk-page-content";
+import { DeskPageFooter } from "../../component/desk-page/desk-page-footer";
+import { DeskPageHeader } from "../../component/desk-page/desk-page-header";
+import { DeskPageContent } from "../../component/desk-page/desk-page-content";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { DashboardPath } from "../../../consts/path/dashboard";
+
+const Dashboard = lazy(() => import("../dashboard/index"));
 
 const Entry = () => {
   return (
     <EntryStyle>
-      <DeskPageHeader/>
-      <DeskPageContent/>
-      <DeskPageFooter/>
+      <DeskPageHeader />
+      <DeskPageContent>
+        <Switch>
+          <Route path={DashboardPath.INDEX} render={() => <Dashboard />} />
+          <Redirect to={DashboardPath.INDEX} />
+        </Switch>
+      </DeskPageContent>
+      <DeskPageFooter />
     </EntryStyle>
   );
 };

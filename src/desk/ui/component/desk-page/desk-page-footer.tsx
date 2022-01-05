@@ -1,4 +1,4 @@
-import { MyFooter } from "../../component/antd/my-layout";
+import { MyFooter } from "../antd/my-layout";
 import React, { FC } from "react";
 
 export const DeskPageFooter: FC = (props) => {

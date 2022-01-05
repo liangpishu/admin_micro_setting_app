@@ -9,7 +9,12 @@ const Dashborad = () => {
   return (
     <div>
       已登录
-
+      <PButton onClick={() => {
+        MyStorage.Account.clear();
+        history.push(LoginPath.LOGIN);
+      }}>
+        退出
+      </PButton>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { MyHeader } from "../../component/antd/my-layout";
+import { MyHeader } from "../antd/my-layout";
 import { Menu } from "antd";
 import React, { FC } from "react";
 
