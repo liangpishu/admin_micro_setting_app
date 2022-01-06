@@ -1,22 +1,33 @@
-import React from 'react';
-import { useHistory } from 'react-router';
-import { LoginPath } from '../../../consts/path/login';
-import { MyStorage } from '../../../storage';
-import { PButton } from '../../component/antd/button';
+import React, { CSSProperties } from "react";
+import { Carousel } from "antd";
 
-const Dashborad = () => {
-  const history = useHistory();
+const contentStyle: CSSProperties = {
+  height: "160px",
+  color: "#fff",
+  lineHeight: "160px",
+  textAlign: "center",
+  background: "#364d79",
+};
+
+const Dashboard = () => {
   return (
-    <div>
-      已登录
-      <PButton onClick={() => {
-        MyStorage.Account.clear();
-        history.push(LoginPath.LOGIN);
-      }}>
-        退出
-      </PButton>
-    </div>
+    <Carousel effect="fade">
+      <div>
+        <h3 style={contentStyle}>
+          Dashboard 1
+        </h3>
+      </div>
+      <div>
+        <h3 style={contentStyle}>Dashboard 2</h3>
+      </div>
+      <div>
+        <h3 style={contentStyle}>Dashboard 3</h3>
+      </div>
+      <div>
+        <h3 style={contentStyle}>Dashboard 4</h3>
+      </div>
+    </Carousel>
   );
 };
 
-export default Dashborad;
+export default Dashboard;

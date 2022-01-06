@@ -17,7 +17,6 @@ class Styles {
     const define = this.getTheme(name);
 
     return StyledF.createGlobalStyle`
-      ${AntdStyle(define)}
       *{
         margin: 0;
         padding: 0;
@@ -36,7 +35,8 @@ class Styles {
           height:0;
           visibility:hidden;
         }
-      }   
+        ${AntdStyle(define)} 
+      }  
 	  `;
   }
 }

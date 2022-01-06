@@ -4,21 +4,27 @@ import { DeskPageFooter } from "../../component/desk-page/desk-page-footer";
 import { DeskPageHeader } from "../../component/desk-page/desk-page-header";
 import { DeskPageContent } from "../../component/desk-page/desk-page-content";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { DashboardPath } from "../../../consts/path/dashboard";
+import { DashboardPath } from "desk/consts/path/dashboard";
+import MyLangUtil from "../../../utils/my-lang-util";
+import { AdminPath } from "desk/consts/path/admin";
 
-const Dashboard = lazy(() => import("../dashboard/index"));
+const Dashboard = lazy(() => import("../dashboard"));
+const AdminIndex = lazy(() => import("../admin"));
 
 const Entry = () => {
   return (
     <EntryStyle>
-      <DeskPageHeader />
+      <DeskPageHeader/>
       <DeskPageContent>
-        <Switch>
-          <Route path={DashboardPath.INDEX} render={() => <Dashboard />} />
-          <Redirect to={DashboardPath.INDEX} />
-        </Switch>
+        <React.Suspense fallback={<div>{MyLangUtil.get("Loading...")}</div>}>
+          <Switch>
+            <Route path={DashboardPath.INDEX} render={() => <Dashboard/>}/>
+            <Route path={AdminPath.INDEX} render={() => <AdminIndex/>}/>
+            <Redirect to={DashboardPath.INDEX}/>
+          </Switch>
+        </React.Suspense>
       </DeskPageContent>
-      <DeskPageFooter />
+      <DeskPageFooter/>
     </EntryStyle>
   );
 };
