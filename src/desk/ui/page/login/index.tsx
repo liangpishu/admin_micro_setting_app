@@ -20,12 +20,12 @@ const Login = () => {
     const findUser = UserInfo.find((item) => item.userName === values.userName && item.pwd === values.pwd);
     if (MyLodashUtil.isEmpty(findUser)) {
       Message.error({
-        content: MyLangUtil.get("账号或密码错误！")
+        content: MyLangUtil.get("Incorrect username or password！"),
       });
     } else {
       MyStorage.Account.set("userName", values.userName);
       MyStorage.Account.set("authKey", values.userName);
-      message.success("登录成功！");
+      message.success(MyLangUtil.get("Login successful！"));
       history.replace("/");
     }
   };
@@ -40,20 +40,20 @@ const Login = () => {
         <FForm onFinish={onFinish} className={"login-form"} form={form}>
           <FText
             inputProps={{
-              placeholder: MyLangUtil.get("账号"),
-              prefix: <UserOutlined className="site-form-item-icon" />,
+              placeholder: MyLangUtil.get("User"),
+              prefix: <UserOutlined className="site-form-item-icon"/>,
             }}
-            propName={"userName"} />
+            propName={"userName"}/>
           <FText
             inputProps={{
-              placeholder: MyLangUtil.get("密码"),
-              prefix: <LockOutlined className="site-form-item-icon" />,
+              placeholder: MyLangUtil.get("Password"),
+              prefix: <LockOutlined className="site-form-item-icon"/>,
               type: "password",
             }}
-            propName={"pwd"} />
+            propName={"pwd"}/>
           <FItem>
             <PButton htmlType="submit" className={"login-form-button"}>
-              {MyLangUtil.get("登录")}
+              {MyLangUtil.get("Login")}
             </PButton>
           </FItem>
         </FForm>

@@ -10,10 +10,9 @@ const { SubMenu } = Menu;
 const MenuComponent: FC = (props) => {
   const history = useHistory();
   const handleClick = useCallback((e) => {
-    console.log(e, "e");
     history.push(e.key);
   }, [history]);
-  return <Menu theme={"dark"} mode="horizontal" onClick={handleClick} selectedKeys={[window.location.pathname]}>
+  return <Menu className={"page-header-menu"} theme={"dark"} mode="horizontal" onClick={handleClick} selectedKeys={[window.location.pathname]}>
     {MenuItems.map((item, index) => {
       if (!MyLodashUtil.isEmpty(item.children)) {
         return <SubMenu popupOffset={[-20, 5]} key={item.path} title={item.itemName}>
