@@ -6,8 +6,12 @@ const UserInfo = lazy(() => import("./user"));
 const Admin = () => {
   return (
     <Switch>
-      <Route path={AdminPath.USER_INFO} render={() => <UserInfo/>}/>
-      <Redirect to={AdminPath.USER_INFO}/>
+      <Route
+        path={AdminPath.USER_INFO}
+        key={AdminPath.USER_INFO}
+        render={() => <UserInfo />}
+      />
+      <Redirect to={AdminPath.USER_INFO} />
     </Switch>
   );
 };

@@ -12,54 +12,63 @@ import { useHistory } from "react-router";
 import { UserInfo } from "../../../consts/user-info/user-info";
 import MyLodashUtil from "../../../utils/my-lodash-util";
 import Message from "../../../service/message";
+import { CommonService } from "desk/service/common/common-service";
 
 const Login = () => {
   const [form] = useForm();
   const history = useHistory();
   const onFinish = (values: any) => {
-    const findUser = UserInfo.find((item) => item.userName === values.userName && item.pwd === values.pwd);
-    if (MyLodashUtil.isEmpty(findUser)) {
-      Message.error({
-        content: MyLangUtil.get("Incorrect username or password！"),
-      });
-    } else {
-      MyStorage.Account.set("userName", values.userName);
-      MyStorage.Account.set("authKey", values.userName);
-      message.success(MyLangUtil.get("Login successful！"));
-      history.replace("/");
-    }
+    CommonService.login({ userName: values?.userName, pwd: values?.pwd }).then(
+      (res) => {
+        console.log(res);
+        const token = MyLodashUtil.get(res, "respData.token");
+        MyStorage.Account.set("userName", values.userName);
+        MyStorage.Account.set("authKey", token);
+        message.success(MyLangUtil.get("Login successful！"));
+        history.replace("/");
+      }
+    );
   };
-  return <LoginStyle>
-    <Row className={"login-row"}>
-      <Col span={12} className={"login-left"}>
-        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consectetur facilis fugiat, natus recusandae
-          sunt tempora voluptates! Aliquam amet beatae corporis, numquam saepe tempora tenetur voluptatibus. Recusandae
-          repudiandae temporibus voluptatibus.</p>
-      </Col>
-      <Col span={12} className={"login-right"}>
-        <FForm onFinish={onFinish} className={"login-form"} form={form}>
-          <FText
-            inputProps={{
-              placeholder: MyLangUtil.get("User"),
-              prefix: <UserOutlined className="site-form-item-icon"/>,
-            }}
-            propName={"userName"}/>
-          <FText
-            inputProps={{
-              placeholder: MyLangUtil.get("Password"),
-              prefix: <LockOutlined className="site-form-item-icon"/>,
-              type: "password",
-            }}
-            propName={"pwd"}/>
-          <FItem>
-            <PButton htmlType="submit" className={"login-form-button"}>
-              {MyLangUtil.get("Login")}
-            </PButton>
-          </FItem>
-        </FForm>
-      </Col>
-    </Row>
-  </LoginStyle>;
+  return (
+    <LoginStyle>
+      <Row className={"login-row"}>
+        <Col span={12} className={"login-left"}>
+          <p>
+            {" "}
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
+            consectetur facilis fugiat, natus recusandae sunt tempora
+            voluptates! Aliquam amet beatae corporis, numquam saepe tempora
+            tenetur voluptatibus. Recusandae repudiandae temporibus
+            voluptatibus.
+          </p>
+        </Col>
+        <Col span={12} className={"login-right"}>
+          <FForm onFinish={onFinish} className={"login-form"} form={form}>
+            <FText
+              inputProps={{
+                placeholder: MyLangUtil.get("User"),
+                prefix: <UserOutlined className="site-form-item-icon" />,
+              }}
+              propName={"userName"}
+            />
+            <FText
+              inputProps={{
+                placeholder: MyLangUtil.get("Password"),
+                prefix: <LockOutlined className="site-form-item-icon" />,
+                type: "password",
+              }}
+              propName={"pwd"}
+            />
+            <FItem>
+              <PButton htmlType="submit" className={"login-form-button"}>
+                {MyLangUtil.get("Login")}
+              </PButton>
+            </FItem>
+          </FForm>
+        </Col>
+      </Row>
+    </LoginStyle>
+  );
 };
 
 export default Login;

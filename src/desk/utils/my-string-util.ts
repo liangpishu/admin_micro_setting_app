@@ -1,13 +1,16 @@
-class MyStringUtilClass {
-  isBlank(value?: string) {
-    return !value;
+import MyJsTypeUtil from "./my-js-type-util";
+
+class MyStringUtil {
+  static isBlank(value?: string) {
+    if (value === "" || MyJsTypeUtil.isNullOrUndefined(value)) {
+      return true;
+    }
+    return false;
   }
 
-  isNotBlank(value?: string) {
-    return !!value;
+  static isNotBlank(value?: string) {
+    return !this.isBlank(value);
   }
-
 }
 
-const MyStringUtil = new MyStringUtilClass();
 export default MyStringUtil;
