@@ -21,7 +21,7 @@ const Login = () => {
     CommonService.login({ userName: values?.userName, pwd: values?.pwd }).then(
       (res) => {
         console.log(res);
-        const token = MyLodashUtil.get(res, "respData.token");
+        const token = MyLodashUtil.get(res, "respData.authKey");
         MyStorage.Account.set("userName", values.userName);
         MyStorage.Account.set("authKey", token);
         message.success(MyLangUtil.get("Login successful！"));
