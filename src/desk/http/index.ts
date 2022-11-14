@@ -1,9 +1,8 @@
 import axios, { AxiosRequestConfig, Method } from "axios";
-import MyLodashUtil from "desk/utils/my-lodash-util";
-import MyStringUtil from "desk/utils/my-string-util";
-import Message from "../service/message";
-import { AccountService } from "../service/user";
-
+import MyLodashUtil from "@utils/my-lodash-util";
+import MyStringUtil from "@utils/my-string-util";
+import { AccountService } from "@service/user";
+import Message from "@/desk/service/message";
 interface IConfig extends AxiosRequestConfig {
   loading?: boolean;
   isSilent?: boolean;

@@ -1,15 +1,15 @@
 import React, { lazy, useState } from "react";
 import styled from "styled-components";
-import { DeskPageFooter } from "../../component/desk-page/desk-page-footer";
-import { DeskPageHeader } from "../../component/desk-page/desk-page-header";
-import { DeskPageContent } from "../../component/desk-page/desk-page-content";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { DashboardPath } from "desk/consts/path/dashboard";
+import { DashboardPath } from "@consts/path/dashboard";
 import MyLangUtil from "../../../utils/my-lang-util";
-import { AdminPath } from "desk/consts/path/admin";
-import { MyLayout } from "desk/ui/component/antd/my-layout";
-import { DeskPageSider } from "desk/ui/component/desk-page/desk-page-sider";
+import { AdminPath } from "@consts/path/admin";
+import { MyLayout } from "@ui/component/antd/my-layout";
+import { DeskPageSider } from "@ui/component/desk-page/desk-page-sider";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { DeskPageHeader } from "@ui/component/desk-page/desk-page-header";
+import { DeskPageContent } from "@ui/component/desk-page/desk-page-content";
+import { DeskPageFooter } from "@ui/component/desk-page/desk-page-footer";
 const Dashboard = lazy(() => import("../dashboard"));
 const AdminIndex = lazy(() => import("../admin"));
 

@@ -1,4 +1,4 @@
-import { Apis } from "desk/consts/apis";
+import { Apis } from "@/desk/consts/apis";
 import Http from "../../http";
 import MyStringUtil from "../../utils/my-string-util";
 

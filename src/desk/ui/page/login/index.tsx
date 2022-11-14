@@ -1,18 +1,16 @@
 import { useForm } from "antd/es/form/Form";
-import FForm from "../../component/antd/f-form";
-import { FText } from "../../component/antd/f-text";
-import MyLangUtil from "../../../utils/my-lang-util";
-import { LoginStyle } from "../../style/login-style";
 import { Col, message, Row } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { FItem } from "../../component/antd/f-item";
-import { PButton } from "../../component/antd/button";
-import { MyStorage } from "../../../storage";
 import { useHistory } from "react-router";
-import { UserInfo } from "../../../consts/user-info/user-info";
-import MyLodashUtil from "../../../utils/my-lodash-util";
-import Message from "../../../service/message";
-import { CommonService } from "desk/service/common/common-service";
+import { CommonService } from "@service/common/common-service";
+import { MyStorage } from "@storage/index";
+import { PButton } from "@ui/component/antd/button";
+import FForm from "@ui/component/antd/f-form";
+import { FItem } from "@ui/component/antd/f-item";
+import { FText } from "@ui/component/antd/f-text";
+import { LoginStyle } from "@ui/style/login-style";
+import MyLangUtil from "@utils/my-lang-util";
+import MyLodashUtil from "@utils/my-lodash-util";
 
 const Login = () => {
   const [form] = useForm();

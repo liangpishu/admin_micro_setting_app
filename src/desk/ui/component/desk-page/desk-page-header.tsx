@@ -1,12 +1,11 @@
 import { MyHeader } from "../antd/my-layout";
 import React, { FC, useMemo } from "react";
-import MenuComponent from "../menu";
 import styled from "styled-components";
 import { Avatar, Dropdown, Menu } from "antd";
-import { MyStorage } from "desk/storage";
+import { MyStorage } from "@/desk/storage";
 import { DownOutlined } from "@ant-design/icons";
-import MyLangUtil from "desk/utils/my-lang-util";
-import { LoginPath } from "desk/consts/path/login";
+import { LoginPath } from "@consts/path/login";
+import MyLangUtil from "@utils/my-lang-util";
 import { useHistory } from "react-router";
 
 export const DeskPageHeader: FC = (props) => {

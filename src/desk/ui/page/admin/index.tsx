@@ -1,6 +1,6 @@
 import React, { lazy } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { AdminPath } from "desk/consts/path/admin";
+import { AdminPath } from "@/desk/consts/path/admin";
 
 const UserInfo = lazy(() => import("./user"));
 const Admin = () => {

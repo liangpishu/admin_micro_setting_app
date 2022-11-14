@@ -1,5 +1,3 @@
-
-
 class MyLangUtilClass {
   /**
    * return current language value

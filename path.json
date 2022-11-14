@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"],
+            "@consts/*": ["src/desk/consts/*"],
+            "@utils/*": ["src/desk/utils/*"],
+            "@service/*": ["src/desk/service/*"],
+            "@storage/*": ["src/desk/storage/*"],
+            "@ui/*": ["src/desk/ui/*"],
+            "@page/*": ["src/desk/ui/page/*"],
+            "@style/*": ["src/desk/ui/style/*"]
+        }
+    }
+}
