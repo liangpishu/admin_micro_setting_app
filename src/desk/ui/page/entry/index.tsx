@@ -1,4 +1,4 @@
-import React, { lazy, useState } from "react";
+import React, { FC, lazy, useState } from "react";
 import styled from "styled-components";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { DashboardPath } from "@consts/path/dashboard";
@@ -10,10 +10,27 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { DeskPageHeader } from "@ui/component/desk-page/desk-page-header";
 import { DeskPageContent } from "@ui/component/desk-page/desk-page-content";
 import { DeskPageFooter } from "@ui/component/desk-page/desk-page-footer";
+import { SettingPath } from "@/desk/consts/path/setting";
 const Dashboard = lazy(() => import("../dashboard"));
 const AdminIndex = lazy(() => import("../admin"));
+const UserSetting = lazy(() => import("../setting/index"));
 
 const Entry = () => {
+  return (
+    <EntryLayout>
+      <React.Suspense fallback={<div>{MyLangUtil.get("Loading...")}</div>}>
+        <Switch>
+          <Route path={DashboardPath.INDEX} render={() => <Dashboard />} />
+          <Route path={AdminPath.INDEX} render={() => <AdminIndex />} />
+          <Route path={SettingPath.INDEX} render={() => <UserSetting />} />
+          <Redirect to={DashboardPath.INDEX} />
+        </Switch>
+      </React.Suspense>
+    </EntryLayout>
+  );
+};
+
+const EntryLayout: FC = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <EntryStyle style={{ minHeight: "100vh" }}>
@@ -28,21 +45,12 @@ const Entry = () => {
             }
           )}
         </DeskPageHeader>
-        <DeskPageContent>
-          <React.Suspense fallback={<div>{MyLangUtil.get("Loading...")}</div>}>
-            <Switch>
-              <Route path={DashboardPath.INDEX} render={() => <Dashboard />} />
-              <Route path={AdminPath.INDEX} render={() => <AdminIndex />} />
-              <Redirect to={DashboardPath.INDEX} />
-            </Switch>
-          </React.Suspense>
-        </DeskPageContent>
+        <DeskPageContent>{props.children}</DeskPageContent>
         <DeskPageFooter />
       </MyLayout>
     </EntryStyle>
   );
 };
-
 export default Entry;
 
 const EntryStyle = styled(MyLayout)`

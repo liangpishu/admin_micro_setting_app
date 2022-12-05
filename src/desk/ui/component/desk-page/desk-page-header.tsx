@@ -7,6 +7,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { LoginPath } from "@consts/path/login";
 import MyLangUtil from "@utils/my-lang-util";
 import { useHistory } from "react-router";
+import { SettingPath } from "@/desk/consts/path/setting";
 
 export const DeskPageHeader: FC = (props) => {
   return (
@@ -23,7 +24,12 @@ const HeaderRight: FC = () => {
   const headerRightMenu = useMemo(() => {
     return (
       <Menu>
-        <Menu.Item key="Setting" onClick={() => {}}>
+        <Menu.Item
+          key="Setting"
+          onClick={() => {
+            history.push(SettingPath.INDEX);
+          }}
+        >
           {MyLangUtil.get("Setting")}
         </Menu.Item>
         <Menu.Divider />

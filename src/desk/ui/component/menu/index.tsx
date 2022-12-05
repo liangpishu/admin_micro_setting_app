@@ -1,9 +1,8 @@
 import { Menu } from "antd";
-import React, { FC, useCallback } from "react";
-import { DashboardPath } from "../../../consts/path/dashboard";
-import { AdminPath } from "../../../consts/path/admin";
+import React, { FC, useCallback, useMemo } from "react";
 import { useHistory } from "react-router";
 import MyLodashUtil from "../../../utils/my-lodash-util";
+import { MenuUtils } from "@/desk/utils/menu-utils";
 
 const { SubMenu } = Menu;
 
@@ -15,6 +14,7 @@ const MenuComponent: FC = (props) => {
     },
     [history]
   );
+  const menus = useMemo(() => MenuUtils.filterMenuItems(), []);
   return (
     <Menu
       className={"page-header-menu"}
@@ -23,7 +23,7 @@ const MenuComponent: FC = (props) => {
       onClick={handleClick}
       selectedKeys={[window.location.pathname]}
     >
-      {MenuItems.map((item, index) => {
+      {menus.map((item, index) => {
         if (!MyLodashUtil.isEmpty(item.children)) {
           return (
             <SubMenu
@@ -48,30 +48,3 @@ const MenuComponent: FC = (props) => {
 };
 
 export default MenuComponent;
-
-interface IMenuItem {
-  itemCode: string;
-  itemName: string;
-  path: string;
-  children?: IMenuItem[];
-}
-
-const MenuItems: IMenuItem[] = [
-  {
-    itemCode: "dashboard01",
-    itemName: "DashBoard",
-    path: DashboardPath.INDEX,
-  },
-  {
-    itemCode: "admin01",
-    itemName: "Admin",
-    path: AdminPath.INDEX,
-    children: [
-      {
-        itemCode: "admin0101",
-        itemName: "User Info",
-        path: AdminPath.USER_INFO,
-      },
-    ],
-  },
-];

@@ -15,6 +15,7 @@ class CommonService {
   }
 
   static async login(props: ILoginProps) {
+    return { respData: { userName: "liang", authKey: "123" } };
     return Http.post(Apis.login, props).then((res) => {
       return res.data;
     });
