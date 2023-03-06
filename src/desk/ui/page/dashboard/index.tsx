@@ -13,9 +13,7 @@ const Dashboard = () => {
   return (
     <Carousel effect="fade">
       <div>
-        <h3 style={contentStyle}>
-          Dashboard 1
-        </h3>
+        <h3 style={contentStyle}>Dashboard 1</h3>
       </div>
       <div>
         <h3 style={contentStyle}>Dashboard 2</h3>

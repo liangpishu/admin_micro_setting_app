@@ -7,7 +7,7 @@ import zhCN from "antd/lib/locale/zh_CN";
 import moment from "moment";
 import "moment/locale/zh-cn";
 import "antd/dist/antd.variable.min.css";
-
+import { FacebookProvider } from "react-facebook";
 moment.locale("zh-cn");
 
 ConfigProvider.config({
@@ -21,9 +21,9 @@ function App() {
   console.log(process.env);
   return (
     <>
-      <GlobalStyle/>
+      <GlobalStyle />
       <ConfigProvider locale={zhCN}>
-        <RouterEntry/>
+        <RouterEntry />
       </ConfigProvider>
     </>
   );
