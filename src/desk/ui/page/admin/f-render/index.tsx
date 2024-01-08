@@ -1,11 +1,11 @@
 import { MyStorage } from "@/desk/storage";
-import MyLangUtil from "@/desk/utils/my-lang-util";
+import { MyLangUtil } from "@utils";
 import Generator from "fr-generator";
 import { useRef } from "react";
 
 const FRender = () => {
   const genRef = useRef<any>();
-  const defaultSchema = MyStorage.FrenderData.session.get("schema");
+  const defaultSchema = MyStorage.FRenderData.session.get("schema");
   return (
     <div style={{ height: "80vh" }}>
       <Generator
@@ -21,7 +21,7 @@ const FRender = () => {
             onClick: () => {
               const value = genRef?.current?.getValue();
               console.log(value, "value");
-              MyStorage.FrenderData.session.set("schema", value);
+              MyStorage.FRenderData.session.set("schema", value);
             },
             type: "primary",
           },

@@ -1,4 +1,4 @@
-import MyJsTypeUtil from "./my-js-type-util";
+import { MyJsTypeUtil } from "@utils";
 
 class MyArrayUtil {
   static filterNullItem<T>(array: Array<T>): Array<T> {
@@ -7,6 +7,7 @@ class MyArrayUtil {
     }
     return [];
   }
+
   static isEmpty<T>(array?: Array<T>): boolean {
     return Array.isArray(array) && array.length === 0;
   }

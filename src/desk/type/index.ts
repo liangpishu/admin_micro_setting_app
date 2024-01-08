@@ -1,21 +1,17 @@
 import { NamePath } from "antd/lib/form/interface";
 
 interface PropPath {
-  propName?: NamePath
+  propName?: NamePath;
 }
 
 interface IOptionItem {
   id: string | number;
   text: string;
-  [propName: string]: any
+  ext: Record<string, unknown>;
 }
 
 interface PrefixPath {
   prefix?: NamePath;
 }
 
-export type {
-  PrefixPath,
-  PropPath,
-  IOptionItem
-}
+export type { PrefixPath, PropPath, IOptionItem };

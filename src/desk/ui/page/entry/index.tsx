@@ -2,7 +2,7 @@ import React, { FC, lazy, useState } from "react";
 import styled from "styled-components";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { DashboardPath } from "@consts/path/dashboard";
-import MyLangUtil from "../../../utils/my-lang-util";
+import { MyLangUtil } from "@utils";
 import { AdminPath, FormRenderPath } from "@consts/path";
 import { MyLayout } from "@ui/component/antd/my-layout";
 import { DeskPageSider } from "@ui/component/desk-page/desk-page-sider";
@@ -11,6 +11,7 @@ import { DeskPageHeader } from "@ui/component/desk-page/desk-page-header";
 import { DeskPageContent } from "@ui/component/desk-page/desk-page-content";
 import { DeskPageFooter } from "@ui/component/desk-page/desk-page-footer";
 import { SettingPath } from "@/desk/consts/path/setting";
+
 const Dashboard = lazy(() => import("../dashboard"));
 const AdminIndex = lazy(() => import("../admin"));
 const UserSetting = lazy(() => import("../setting"));
@@ -24,10 +25,7 @@ const Entry = () => {
           <Route path={DashboardPath.INDEX} render={() => <Dashboard />} />
           <Route path={AdminPath.INDEX} render={() => <AdminIndex />} />
           <Route path={SettingPath.INDEX} render={() => <UserSetting />} />
-          <Route
-            path={FormRenderPath.INDEX}
-            render={() => <FormRenderIndex />}
-          />
+          <Route path={FormRenderPath.INDEX} render={() => <FormRenderIndex />} />
           <Redirect to={DashboardPath.INDEX} />
         </Switch>
       </React.Suspense>
@@ -42,13 +40,10 @@ const EntryLayout: FC = (props) => {
       <DeskPageSider trigger={null} collapsible collapsed={collapsed} />
       <MyLayout className="site-layout">
         <DeskPageHeader>
-          {React.createElement(
-            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-            {
-              className: "trigger",
-              onClick: () => setCollapsed(!collapsed),
-            }
-          )}
+          {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+            className: "trigger",
+            onClick: () => setCollapsed(!collapsed),
+          })}
         </DeskPageHeader>
         <DeskPageContent>{props.children}</DeskPageContent>
         <DeskPageFooter />
@@ -66,6 +61,7 @@ const EntryStyle = styled(MyLayout)`
       background: rgba(255, 255, 255, 0.3);
     }
   }
+
   .site-layout {
     > .page-header {
       display: flex;
@@ -73,10 +69,12 @@ const EntryStyle = styled(MyLayout)`
       align-items: center;
       background-color: #fff;
     }
+
     .page-content {
       // 外层盒子
       padding: 0 24px;
       min-height: calc(100% - 70px - 64px);
+
       .site-layout-content {
         // 内容区域
         flex: 1;

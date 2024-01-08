@@ -18,5 +18,9 @@ module.exports = override(
     "@ui": path.resolve(__dirname, "src/desk/ui"),
     "@page": path.resolve(__dirname, "src/desk/ui/page"),
     "@style": path.resolve(__dirname, "src/desk/ui/style"),
+    "@http": path.resolve(__dirname, "src/desk/http"),
+    "@types": path.resolve(__dirname, "src/desk/type"),
+    "@form-components": path.resolve(__dirname, "src/desk/ui/component/antd/form"),
+    "@components": path.resolve(__dirname, "src/desk/ui/component"),
   })
 );

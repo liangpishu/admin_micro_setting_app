@@ -1,9 +1,10 @@
 import { MyStorage } from "@/desk/storage";
 import { Button, Modal } from "antd";
 import FormRender, { useForm } from "form-render";
+
 export default () => {
   const form = useForm();
-  const schema = MyStorage.FrenderData.get("schema");
+  const schema = MyStorage.FRenderData.get("schema");
   const onFinish = (formData: object) => {
     Modal.info({
       title: "Submit Data",

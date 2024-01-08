@@ -1,11 +1,8 @@
-import MyJsTypeUtil from "./my-js-type-util";
+import { MyJsTypeUtil } from "@utils";
 
 class MyStringUtil {
   static isBlank(value?: string) {
-    if (value === "" || MyJsTypeUtil.isNullOrUndefined(value)) {
-      return true;
-    }
-    return false;
+    return value === "" || MyJsTypeUtil.isNullOrUndefined(value);
   }
 
   static isNotBlank(value?: string) {
@@ -13,4 +10,4 @@ class MyStringUtil {
   }
 }
 
-export default MyStringUtil;
+export { MyStringUtil };

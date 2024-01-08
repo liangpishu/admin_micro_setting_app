@@ -4,11 +4,10 @@ import "./App.css";
 import RouterEntry from "./desk/router";
 import Styles from "./desk/ui/style/index";
 import zhCN from "antd/lib/locale/zh_CN";
-import moment from "moment";
+import dayjs from "dayjs";
 import "moment/locale/zh-cn";
-import "antd/dist/antd.variable.min.css";
-import { FacebookProvider } from "react-facebook";
-moment.locale("zh-cn");
+
+dayjs.locale("zh-cn");
 
 ConfigProvider.config({
   theme: {

@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig, Method } from "axios";
-import MyLodashUtil from "@utils/my-lodash-util";
-import MyStringUtil from "@utils/my-string-util";
+import { MyLodashUtil, MyStringUtil } from "@utils";
 import { AccountService } from "@service/user";
 import Message from "@/desk/service/message";
+
 interface IConfig extends AxiosRequestConfig {
   loading?: boolean;
   isSilent?: boolean;
@@ -35,7 +35,7 @@ class HttpClass {
     return this.ajax(url, "post", data, config);
   }
 
-  ajax(url: string, method: Method, data?: any, config?: IConfig) {
+  async ajax(url: string, method: Method, data?: any, config?: IConfig) {
     let headers = config?.headers || {};
     const authKey = AccountService.getAuthKey();
 
@@ -44,31 +44,29 @@ class HttpClass {
       ...headers,
       AuthKey: authKey,
     };
-    return axios({
-      method: method,
-      url: newUrl,
-      data,
-      ...(config || {}),
-      headers,
-    })
-      .then((res) => {
-        if (!config?.isSilent && res.status !== 200) {
-          Message.error({ content: "请求失败了, 请稍后再试" });
-        }
-        console.log(res, "http");
-
-        return res;
-      })
-      .catch((e) => {
-        if (!config?.isSilent) {
-          let respMsg = MyLodashUtil.get(e, "respMsg", "");
-          if (MyStringUtil.isBlank(respMsg)) {
-            respMsg = "请求失败了, 请稍后再试";
-          }
-          Message.error({ content: respMsg });
-        }
-        throw e;
+    try {
+      const res = await axios({
+        method: method,
+        url: newUrl,
+        data,
+        ...(config || {}),
+        headers,
       });
+      if (!config?.isSilent && res.status !== 200) {
+        Message.error({ content: "请求失败了, 请稍后再试" });
+      }
+      console.log(res, "http");
+      return res;
+    } catch (e) {
+      if (!config?.isSilent) {
+        let respMsg = MyLodashUtil.get(e, "respMsg", "");
+        if (MyStringUtil.isBlank(respMsg)) {
+          respMsg = "请求失败了, 请稍后再试";
+        }
+        Message.error({ content: respMsg });
+      }
+      throw e;
+    }
   }
 
   getServiceLocation(relativePath: string) {

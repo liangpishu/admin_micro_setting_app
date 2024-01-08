@@ -1,31 +1,22 @@
 import { useForm } from "antd/es/form/Form";
-import { Col, message, Row } from "antd";
+import { Col, Row } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router";
 import { CommonService } from "@service/common/common-service";
-import { MyStorage } from "@storage/index";
+import { MyStorage } from "@storage";
 import { PButton } from "@ui/component/antd/button";
-import FForm from "@ui/component/antd/f-form";
-import { FItem } from "@ui/component/antd/f-item";
-import { FText } from "@ui/component/antd/f-text";
+import { FItem, FText, FForm } from "@form-components";
 import { LoginStyle } from "@ui/style/login-style";
-import MyLangUtil from "@utils/my-lang-util";
-import MyLodashUtil from "@utils/my-lodash-util";
+import { MyLodashUtil, MyLangUtil } from "@utils";
+import { Message } from "@/desk/service";
 
 const Login = () => {
   const [form] = useForm();
   const history = useHistory();
-  const onFinish = (values: any) => {
-    CommonService.login({ userName: values?.userName, pwd: values?.pwd }).then(
-      (res) => {
-        console.log(res);
-        const token = MyLodashUtil.get(res, "respData.authKey");
-        MyStorage.Account.set("userName", values.userName);
-        MyStorage.Account.set("authKey", token);
-        message.success(MyLangUtil.get("Login successful！"));
-        history.replace("/");
-      }
-    );
+  const onFinish = (values: Record<string, string>) => {
+    CommonService.login({ userName: values.userName, pwd: values.pwd }).then((res) => {
+      loginCallback(res, history);
+    });
   };
   return (
     <LoginStyle>
@@ -33,11 +24,9 @@ const Login = () => {
         <Col span={12} className={"login-left"}>
           <p>
             {" "}
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
-            consectetur facilis fugiat, natus recusandae sunt tempora
-            voluptates! Aliquam amet beatae corporis, numquam saepe tempora
-            tenetur voluptatibus. Recusandae repudiandae temporibus
-            voluptatibus.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consectetur facilis fugiat, natus recusandae
+            sunt tempora voluptates! Aliquam amet beatae corporis, numquam saepe tempora tenetur voluptatibus.
+            Recusandae repudiandae temporibus voluptatibus.
           </p>
         </Col>
         <Col span={12} className={"login-right"}>
@@ -68,5 +57,16 @@ const Login = () => {
     </LoginStyle>
   );
 };
+
+function loginCallback(resp: { data: Record<string, unknown> }, history: ReturnType<typeof useHistory>) {
+  const { data } = resp;
+  const token = MyLodashUtil.get(data, "authKey");
+  const userName = MyLodashUtil.get(data, "userName");
+
+  MyStorage.Account.set("userName", userName);
+  MyStorage.Account.set("authKey", token);
+  Message.success({ content: MyLangUtil.get("Login successful！") });
+  history.replace("/");
+}
 
 export default Login;

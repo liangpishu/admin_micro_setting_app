@@ -1,15 +1,52 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["src/*"],
-            "@consts/*": ["src/desk/consts/*"],
-            "@utils/*": ["src/desk/utils/*"],
-            "@service/*": ["src/desk/service/*"],
-            "@storage/*": ["src/desk/storage/*"],
-            "@ui/*": ["src/desk/ui/*"],
-            "@page/*": ["src/desk/ui/page/*"],
-            "@style/*": ["src/desk/ui/style/*"]
-        }
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@consts/*": [
+        "src/desk/consts/*"
+      ],
+      "@utils": [
+        "src/desk/utils/index"
+      ],
+      "@utils/*": [
+        "src/desk/utils/*"
+      ],
+      "@service/*": [
+        "src/desk/service/*"
+      ],
+      "@form-components/*": [
+        "src/desk/ui/component/antd/form/*"
+      ],
+      "@form-components": [
+        "src/desk/ui/component/antd/form/index"
+      ],
+      "@components/*": [
+        "src/desk/ui/component"
+      ],
+      "@storage/*": [
+        "src/desk/storage/*"
+      ],
+      "@storage": [
+        "src/desk/storage/index"
+      ],
+      "@ui/*": [
+        "src/desk/ui/*"
+      ],
+      "@page/*": [
+        "src/desk/ui/page/*"
+      ],
+      "@style/*": [
+        "src/desk/ui/style/*"
+      ],
+      "@http": [
+        "src/desk/http/index"
+      ],
+      "@types": [
+        "src/desk/type/index"
+      ]
     }
+  }
 }

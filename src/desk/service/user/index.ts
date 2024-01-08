@@ -1,4 +1,4 @@
-import { MyStorage } from "../../storage";
+import { MyStorage } from "@storage";
 
 class AccountService {
   static getAuthKey() {
@@ -6,4 +6,4 @@ class AccountService {
   }
 }
 
-export { AccountService }
+export { AccountService };

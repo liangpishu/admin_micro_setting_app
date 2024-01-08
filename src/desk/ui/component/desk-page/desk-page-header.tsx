@@ -5,7 +5,7 @@ import { Avatar, Dropdown, Menu } from "antd";
 import { MyStorage } from "@/desk/storage";
 import { DownOutlined } from "@ant-design/icons";
 import { LoginPath } from "@consts/path/login";
-import MyLangUtil from "@utils/my-lang-util";
+import { MyLangUtil } from "@utils";
 import { useHistory } from "react-router";
 import { SettingPath } from "@/desk/consts/path/setting";
 

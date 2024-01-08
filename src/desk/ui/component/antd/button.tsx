@@ -7,18 +7,15 @@ type TProps = {} & ButtonProps;
 /**
  * primary button
  */
-const PButton:FC<TProps> = (props) => {
-  return  <Button type={"primary"} {...props}/>
-}
+const PButton: FC<TProps> = (props) => {
+  return <Button type={"primary"} {...props} />;
+};
 
 /**
  * normal button
  */
-const NButton:FC<TProps> = (props) => {
-  return <Button {...props}/>
-}
+const NButton: FC<TProps> = (props) => {
+  return <Button {...props} />;
+};
 
-export {
-  PButton,
-  NButton
-}
+export { PButton, NButton };

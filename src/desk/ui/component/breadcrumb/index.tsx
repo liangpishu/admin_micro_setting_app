@@ -1,8 +1,7 @@
 import { Breadcrumb } from "antd";
 import { FC } from "react";
-import MyLangUtil from "../../../utils/my-lang-util";
 import { Link, useLocation } from "react-router-dom";
-import { MenuUtils } from "@/desk/utils/menu-utils";
+import { MenuUtils, MyLangUtil } from "@utils";
 
 const BreadcrumbComponent: FC = (props) => {
   const location = useLocation();

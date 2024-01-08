@@ -3,9 +3,9 @@ import { message } from "antd";
 import { ArgsProps, ConfigOnClose, MessageType } from "antd/lib/message";
 
 interface IMessage {
-  content: React.ReactNode | ArgsProps,
-  duration?: number | (() => void),
-  onClose?: ConfigOnClose
+  content: React.ReactNode | ArgsProps;
+  duration?: number | (() => void);
+  onClose?: ConfigOnClose;
 }
 
 class Message {

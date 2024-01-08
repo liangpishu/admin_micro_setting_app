@@ -1,5 +1,4 @@
-import MyLodashUtil from "./my-lodash-util";
-import { MyArrayUtil } from "./my-array-util";
+import { MyLodashUtil, MyArrayUtil } from "@utils";
 
 class MyPathUtil {
   static merge(...args: any): any[] | undefined {
@@ -9,4 +8,4 @@ class MyPathUtil {
   }
 }
 
-export default MyPathUtil;
+export { MyPathUtil };

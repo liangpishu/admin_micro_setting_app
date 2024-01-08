@@ -1,20 +1,21 @@
 import { Radio } from "antd";
 import { FormItemProps } from "antd/lib/form/FormItem";
-import { IOptionItem, PrefixPath, PropPath } from "../../../type";
+import { IOptionItem, PrefixPath, PropPath } from "@types";
 import { FC, useMemo } from "react";
-import { FItem } from "./f-item";
-import MyLodashUtil from "../../../utils/my-lodash-util";
+import { FItem } from "@form-components";
+import { MyLodashUtil } from "@utils";
 import { RadioProps } from "antd/lib/radio/interface";
-import { useMasterTable } from "../../hooks/use-master-table";
-
+import { useMasterTable } from "@ui/hooks/use-master-table";
 
 type TFIRadio = {
   radioProps?: RadioProps;
-  options?: IOptionItem[],
+  options?: IOptionItem[];
   tableName?: string;
-  type?: "button"
-  filter?: (props: { options: IOptionItem[] }) => IOptionItem[]
-} & FormItemProps & PrefixPath & PropPath;
+  type?: "button";
+  filter?: (props: { options: IOptionItem[] }) => IOptionItem[];
+} & FormItemProps &
+  PrefixPath &
+  PropPath;
 
 export const FRadio: FC<TFIRadio> = (props) => {
   const { radioProps, tableName, options, filter, ...rest } = props;
@@ -43,22 +44,21 @@ const FRadioBase: FC<TFIRadioBase> = (props) => {
   const isButton = useMemo(() => {
     return type == "button";
   }, [type]);
-  return <FItem {...rest}>
-    <Radio.Group
-      {...radioProps}
-    >
-      {
-        options.map((item) => {
-          return isButton ?
+  return (
+    <FItem {...rest}>
+      <Radio.Group {...radioProps}>
+        {options.map((item) => {
+          return isButton ? (
             <Radio.Button value={item.id} key={item.id} data-origin={item}>
               {item.text}
             </Radio.Button>
-            :
+          ) : (
             <Radio value={item.id} key={item.id} data-origin={item}>
               {item.text}
-            </Radio>;
-        })
-      }
-    </Radio.Group>
-  </FItem>;
+            </Radio>
+          );
+        })}
+      </Radio.Group>
+    </FItem>
+  );
 };

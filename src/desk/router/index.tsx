@@ -1,15 +1,9 @@
 import React, { useEffect } from "react";
-import {
-  BrowserRouter,
-  Redirect,
-  Route,
-  Switch,
-  useLocation,
-} from "react-router-dom";
-import { AccountService } from "../service/user";
-import { LoginPath } from "../consts/path/login";
-import Login from "../ui/page/login";
-import Entry from "../ui/page/entry";
+import { BrowserRouter, Redirect, Route, Switch, useLocation } from "react-router-dom";
+import { AccountService } from "@service/user";
+import { LoginPath } from "@consts/path";
+import Login from "@ui/page/login";
+import Entry from "@ui/page/entry";
 
 const RouterEntry = () => {
   return (

@@ -1,7 +1,7 @@
 import { Menu } from "antd";
 import React, { FC, useCallback, useMemo } from "react";
 import { useHistory } from "react-router";
-import MyLodashUtil from "../../../utils/my-lodash-util";
+import { MyLodashUtil } from "@utils";
 import { MenuUtils } from "@/desk/utils/menu-utils";
 
 const { SubMenu } = Menu;
@@ -26,11 +26,7 @@ const MenuComponent: FC = (props) => {
       {menus.map((item, index) => {
         if (!MyLodashUtil.isEmpty(item.children)) {
           return (
-            <SubMenu
-              popupOffset={[-20, 5]}
-              key={item.path}
-              title={item.itemName}
-            >
+            <SubMenu popupOffset={[-20, 5]} key={item.path} title={item.itemName}>
               {item.children?.map((child) => {
                 return <Menu.Item key={child.path}>{child.itemName}</Menu.Item>;
               })}
