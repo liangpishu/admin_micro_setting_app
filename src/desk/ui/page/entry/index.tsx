@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { DashboardPath } from "@consts/path/dashboard";
 import { MyLangUtil } from "@utils";
-import { AdminPath, FormRenderPath } from "@consts/path";
+import { AdminPath } from "@consts/path";
 import { MyLayout } from "@ui/component/antd/my-layout";
 import { DeskPageSider } from "@ui/component/desk-page/desk-page-sider";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
@@ -15,7 +15,6 @@ import { SettingPath } from "@/desk/consts/path/setting";
 const Dashboard = lazy(() => import("../dashboard"));
 const AdminIndex = lazy(() => import("../admin"));
 const UserSetting = lazy(() => import("../setting"));
-const FormRenderIndex = lazy(() => import("../f-render"));
 
 const Entry = () => {
   return (
@@ -25,7 +24,6 @@ const Entry = () => {
           <Route path={DashboardPath.INDEX} render={() => <Dashboard />} />
           <Route path={AdminPath.INDEX} render={() => <AdminIndex />} />
           <Route path={SettingPath.INDEX} render={() => <UserSetting />} />
-          <Route path={FormRenderPath.INDEX} render={() => <FormRenderIndex />} />
           <Redirect to={DashboardPath.INDEX} />
         </Switch>
       </React.Suspense>
@@ -33,7 +31,7 @@ const Entry = () => {
   );
 };
 
-const EntryLayout: FC = (props) => {
+const EntryLayout: FC<{ children?: React.ReactNode }> = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <EntryStyle style={{ minHeight: "100vh" }}>

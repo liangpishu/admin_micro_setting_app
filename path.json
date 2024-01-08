@@ -17,6 +17,10 @@
       "@service/*": [
         "src/desk/service/*"
       ],
+      "@service": [
+        "src/desk/service/index"
+      ],
+
       "@form-components/*": [
         "src/desk/ui/component/antd/form/*"
       ],
@@ -46,6 +50,9 @@
       ],
       "@types": [
         "src/desk/type/index"
+      ],
+      "@hooks/*": [
+        "src/desk/ui/hooks/*"
       ]
     }
   }

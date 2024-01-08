@@ -1,24 +1,26 @@
-import React from "react";
 import { message } from "antd";
-import { ArgsProps, ConfigOnClose, MessageType } from "antd/lib/message";
+import { JointContent, MessageType } from "antd/es/message/interface";
 
 interface IMessage {
-  content: React.ReactNode | ArgsProps;
-  duration?: number | (() => void);
-  onClose?: ConfigOnClose;
+  content: JointContent;
+  duration?: number | VoidFunction;
+  onClose?: VoidFunction;
 }
 
 class Message {
   static success(props: IMessage): MessageType {
-    return message.success(props);
+    const { content, duration, onClose } = props;
+    return message.success(content, duration, onClose);
   }
 
   static error(props: IMessage): MessageType {
-    return message.error(props);
+    const { content, duration, onClose } = props;
+    return message.error(content, duration, onClose);
   }
 
   static info(props: IMessage): MessageType {
-    return message.info(props);
+    const { content, duration, onClose } = props;
+    return message.info(content, duration, onClose);
   }
 }
 

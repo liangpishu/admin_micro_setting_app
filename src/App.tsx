@@ -5,7 +5,7 @@ import RouterEntry from "./desk/router";
 import Styles from "./desk/ui/style/index";
 import zhCN from "antd/lib/locale/zh_CN";
 import dayjs from "dayjs";
-import "moment/locale/zh-cn";
+import "dayjs/locale/zh-cn";
 
 dayjs.locale("zh-cn");
 

@@ -2,13 +2,12 @@ import { useForm } from "antd/es/form/Form";
 import { Col, Row } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router";
-import { CommonService } from "@service/common/common-service";
 import { MyStorage } from "@storage";
 import { PButton } from "@ui/component/antd/button";
 import { FItem, FText, FForm } from "@form-components";
 import { LoginStyle } from "@ui/style/login-style";
 import { MyLodashUtil, MyLangUtil } from "@utils";
-import { Message } from "@/desk/service";
+import { Message, CommonService } from "@service";
 
 const Login = () => {
   const [form] = useForm();

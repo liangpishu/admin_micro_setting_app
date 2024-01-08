@@ -1,9 +1,9 @@
 import { useRequest } from "ahooks";
-import { CommonService } from "../../service/common/common-service";
+import { CommonService } from "@service";
 import { useEffect } from "react";
 
 export function useMasterTable(tableName?: string) {
-  const { data = [], run } = useRequest(() => CommonService.getMasterTable(tableName), {
+  const { data = [], refresh } = useRequest(() => CommonService.getMasterTable(tableName), {
     manual: true,
     cacheKey: `cache-mastertable-${tableName}`,
     staleTime: 1000 * 60 * 60, //缓存 1h
@@ -11,7 +11,7 @@ export function useMasterTable(tableName?: string) {
 
   useEffect(() => {
     if (!!tableName) {
-      run();
+      refresh();
     }
   }, [tableName]);
   return { data };

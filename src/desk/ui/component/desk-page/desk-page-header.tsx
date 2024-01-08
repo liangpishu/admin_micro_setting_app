@@ -9,7 +9,7 @@ import { MyLangUtil } from "@utils";
 import { useHistory } from "react-router";
 import { SettingPath } from "@/desk/consts/path/setting";
 
-export const DeskPageHeader: FC = (props) => {
+export const DeskPageHeader: FC<{ children?: React.ReactNode }> = (props) => {
   return (
     <MyHeader className={"page-header"}>
       {props.children}
@@ -47,12 +47,9 @@ const HeaderRight: FC = () => {
   }, [history]);
   return (
     <HeaderRightStyle>
-      <Avatar
-        style={{ backgroundColor: "#7265e6", verticalAlign: "middle" }}
-        size="large"
-      >
-        {user}
-      </Avatar>
+      {/*<Avatar style={{ backgroundColor: "#7265e6", verticalAlign: "middle" }} size="large">*/}
+      {/*  {user}*/}
+      {/*</Avatar>*/}
       <Dropdown overlay={headerRightMenu} trigger={["click"]}>
         <div className={"header-right-dropdown"}>
           Hi! 你好 <DownOutlined />

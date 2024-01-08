@@ -3,14 +3,15 @@ import React, { FC, useCallback, useMemo } from "react";
 import { useHistory } from "react-router";
 import { MyLodashUtil } from "@utils";
 import { MenuUtils } from "@/desk/utils/menu-utils";
+import { MenuInfo } from "rc-menu/lib/interface";
 
 const { SubMenu } = Menu;
 
 const MenuComponent: FC = (props) => {
   const history = useHistory();
   const handleClick = useCallback(
-    (e) => {
-      history.push(e.key);
+    (info: MenuInfo) => {
+      history.push(info.key);
     },
     [history]
   );
@@ -33,11 +34,7 @@ const MenuComponent: FC = (props) => {
             </SubMenu>
           );
         }
-        return (
-          <Menu.Item key={item.path} onClick={() => handleClick(item.path)}>
-            {item.itemName}
-          </Menu.Item>
-        );
+        return <Menu.Item key={item.path}>{item.itemName}</Menu.Item>;
       })}
     </Menu>
   );

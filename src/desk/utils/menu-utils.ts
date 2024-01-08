@@ -1,6 +1,6 @@
-import { AdminPath, FormRenderPath } from "@/desk/consts/path";
+import { AdminPath } from "@/desk/consts/path";
 import { DashboardPath } from "@/desk/consts/path/dashboard";
-import { MyArrayUtil } from "@/desk/utils/my-array-util";
+import { MyArrayUtil } from "@utils";
 
 interface IMenuItem {
   itemCode: string;
@@ -50,11 +50,7 @@ const MenuItems: IMenuItem[] = [
     itemName: "DashBoard",
     path: DashboardPath.INDEX,
   },
-  {
-    itemCode: "form01",
-    itemName: "Form Render",
-    path: FormRenderPath.INDEX,
-  },
+
   {
     itemCode: "admin01",
     itemName: "Admin",
@@ -64,11 +60,6 @@ const MenuItems: IMenuItem[] = [
         itemCode: "admin0101",
         itemName: "User Info",
         path: AdminPath.USER_INFO,
-      },
-      {
-        itemCode: "admin0102",
-        itemName: "Form Render Config",
-        path: AdminPath.F_RENDER,
       },
     ],
   },

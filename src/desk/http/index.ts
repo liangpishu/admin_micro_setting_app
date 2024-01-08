@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig, Method } from "axios";
 import { MyLodashUtil, MyStringUtil } from "@utils";
-import { AccountService } from "@service/user";
-import Message from "@/desk/service/message";
+import { Message, AccountService } from "@service";
 
 interface IConfig extends AxiosRequestConfig {
   loading?: boolean;
@@ -14,6 +13,7 @@ class HttpClass {
       function (response) {
         // 2xx 范围内的状态码都会触发该函数。
         // 对响应数据做点什么
+        console.log(MyLodashUtil, "MyLodashUtil");
         if (MyLodashUtil.get(response.data, "respCode") !== "0000") {
           return Promise.reject(response.data);
         }

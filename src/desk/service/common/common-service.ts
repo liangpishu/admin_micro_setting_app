@@ -1,7 +1,6 @@
-import { Apis } from "@/desk/consts/apis";
-import Http from "../../http";
 import { MyStringUtil } from "@utils";
 import { IOptionItem } from "@types";
+import Http from "@http";
 
 interface ILoginProps {
   userName: string;
