@@ -17,7 +17,7 @@ ConfigProvider.config({
 
 function App() {
   const GlobalStyle = Styles.createGlobalStyles("");
-  console.log(process.env);
+  // console.log(process.env);
   return (
     <>
       <GlobalStyle />
