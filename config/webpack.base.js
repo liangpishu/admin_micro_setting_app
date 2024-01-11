@@ -1,8 +1,9 @@
 const { appHtml, appIndexJs, appBuild, appSrc } = require("./myPath");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ProgressBarPlugin = require("progress-bar-webpack-plugin");
-const chalk = require("chalk");
 const path = require("path");
+const WebpackBar = require("webpackbar");
+const webpack = require("webpack");
+const ProcessProfile = require.resolve("process/browser");
 
 module.exports = {
   entry: appIndexJs,
@@ -19,8 +20,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: appHtml,
     }),
-    new ProgressBarPlugin({
-      format: `:msg [:bar] ${chalk.green.bold(":percent")} (:elapsed s)`,
+    new WebpackBar({
+      basic: false,
+      profile: false,
+    }),
+    new webpack.ProvidePlugin({
+      process: ProcessProfile, // 必须配置，不然会报错【Uncaught ReferenceError: process is not defined】
     }),
   ],
   module: {
@@ -37,7 +42,7 @@ module.exports = {
     },
       {
         test: /\.css$/, // 匹配CSS文件
-        use: ["style-loader", "css-loader"], // CSS加载器
+        use: ["style-loader", "css-loader", "postcss-loader"], // CSS加载器
       },
       {
         test: /\.(png|svg|jpg|gif)$/, // 匹配图片文件

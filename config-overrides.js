@@ -1,5 +1,5 @@
 // config-overrides.js
-
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const { override, addWebpackAlias } = require("customize-cra");
 const path = require("path");
 const addCustomize = () => (config) => {
