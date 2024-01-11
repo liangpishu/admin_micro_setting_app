@@ -1,13 +1,18 @@
 import { MyHeader } from "../antd/my-layout";
 import React, { FC, useMemo } from "react";
 import styled from "styled-components";
-import { Avatar, Dropdown, Menu } from "antd";
+import { Avatar, Dropdown, Menu, MenuProps } from "antd";
 import { MyStorage } from "@/desk/storage";
 import { DownOutlined } from "@ant-design/icons";
 import { LoginPath } from "@consts/path/login";
 import { MyLangUtil } from "@utils";
 import { useHistory } from "react-router";
 import { SettingPath } from "@/desk/consts/path/setting";
+
+enum DROP_KEY {
+  SETTING = "SETTING",
+  LOG_OUT = "LOG_OUT",
+}
 
 export const DeskPageHeader: FC<{ children?: React.ReactNode }> = (props) => {
   return (
@@ -22,35 +27,31 @@ const HeaderRight: FC = () => {
   const user = MyStorage.Account.get("userName") || "";
   const history = useHistory();
   const headerRightMenu = useMemo(() => {
-    return (
-      <Menu>
-        <Menu.Item
-          key="Setting"
-          onClick={() => {
-            history.push(SettingPath.INDEX);
-          }}
-        >
-          {MyLangUtil.get("Setting")}
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item
-          key="signOut"
-          onClick={() => {
-            MyStorage.Account.clear();
-            history.push(LoginPath.LOGIN);
-          }}
-        >
-          {MyLangUtil.get("Sign Out")}
-        </Menu.Item>
-      </Menu>
-    );
-  }, [history]);
+    return [
+      {
+        label: MyLangUtil.get("Setting"),
+        key: DROP_KEY.SETTING,
+      },
+      {
+        label: MyLangUtil.get("Sign Out"),
+        key: DROP_KEY.LOG_OUT,
+      },
+    ];
+  }, []);
+  const onClick: MenuProps["onClick"] = ({ key }) => {
+    if (key === DROP_KEY.SETTING) {
+      history.push(SettingPath.INDEX);
+    } else if (key === DROP_KEY.LOG_OUT) {
+      MyStorage.Account.clear();
+      history.replace(LoginPath.LOGIN);
+    }
+  };
   return (
     <HeaderRightStyle>
-      {/*<Avatar style={{ backgroundColor: "#7265e6", verticalAlign: "middle" }} size="large">*/}
-      {/*  {user}*/}
-      {/*</Avatar>*/}
-      <Dropdown overlay={headerRightMenu} trigger={["click"]}>
+      <Avatar style={{ backgroundColor: "#7265e6", verticalAlign: "middle" }} size="large">
+        {user}
+      </Avatar>
+      <Dropdown menu={{ items: headerRightMenu, onClick }} trigger={["click"]}>
         <div className={"header-right-dropdown"}>
           Hi! 你好 <DownOutlined />
         </div>
