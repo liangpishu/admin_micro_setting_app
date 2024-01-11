@@ -61,8 +61,13 @@ const MenuItems: IMenuItem[] = [
         itemName: "User Info",
         path: AdminPath.USER_INFO,
       },
+      {
+        itemCode: "admin0102",
+        itemName: "Setting",
+        path: AdminPath.USER_SETTING,
+      },
     ],
   },
 ];
-
+export type { IMenuItem };
 export { MenuUtils };

@@ -8,14 +8,21 @@ import { FItem, FText, FForm } from "@form-components";
 import { LoginStyle } from "@ui/style/login-style";
 import { MyLodashUtil, MyLangUtil } from "@utils";
 import { Message, CommonService } from "@service";
+import { useBoolean } from "ahooks";
 
 const Login = () => {
   const [form] = useForm();
+  const [loading, { setTrue, setFalse }] = useBoolean(false);
   const history = useHistory();
   const onFinish = (values: Record<string, string>) => {
-    CommonService.login({ userName: values.userName, pwd: values.pwd }).then((res) => {
-      loginCallback(res, history);
-    });
+    setTrue();
+    CommonService.login({ userName: values.userName, pwd: values.pwd })
+      .then((res) => {
+        loginCallback(res, history);
+      })
+      .finally(() => {
+        setFalse();
+      });
   };
   return (
     <LoginStyle>
@@ -46,7 +53,7 @@ const Login = () => {
               propName={"pwd"}
             />
             <FItem>
-              <PButton htmlType="submit" className={"login-form-button"}>
+              <PButton htmlType="submit" loading={loading} className={"login-form-button"}>
                 {MyLangUtil.get("Login")}
               </PButton>
             </FItem>

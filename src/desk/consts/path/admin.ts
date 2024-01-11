@@ -1,11 +1,11 @@
 export const AdminPath: AdminPathEnum = {
   INDEX: "/admin",
   USER_INFO: "/admin/user",
-  F_RENDER: "/admin/f-render",
+  USER_SETTING: "/admin/setting",
 };
 
 interface AdminPathEnum {
   INDEX: string;
-  USER_INFO: string
-  F_RENDER: string
+  USER_INFO: string;
+  USER_SETTING: string;
 }

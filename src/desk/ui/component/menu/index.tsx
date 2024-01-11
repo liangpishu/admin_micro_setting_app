@@ -4,39 +4,48 @@ import { useHistory } from "react-router";
 import { MyLodashUtil } from "@utils";
 import { MenuUtils } from "@/desk/utils/menu-utils";
 import { MenuInfo } from "rc-menu/lib/interface";
-
-const { SubMenu } = Menu;
+import { useLocation } from "react-router-dom";
+import { useMenuOpenKeys } from "@hooks/use-menu-open-keys";
 
 const MenuComponent: FC = (props) => {
   const history = useHistory();
+  const location = useLocation();
+  const finalMenuItems = MenuUtils.filterMenuItems();
   const handleClick = useCallback(
     (info: MenuInfo) => {
       history.push(info.key);
     },
     [history]
   );
-  const menus = useMemo(() => MenuUtils.filterMenuItems(), []);
+  const menus = useMemo(
+    () =>
+      finalMenuItems.map((it) => {
+        let children;
+        if (!MyLodashUtil.isEmpty(it.children)) {
+          children = it.children?.map((child) => ({ label: child.itemName, key: child.path }));
+        }
+        return {
+          label: it.itemName,
+          key: it.path,
+          children,
+        };
+      }),
+    []
+  );
+  const [openKeys, setOpenKeys] = useMenuOpenKeys(menus);
   return (
     <Menu
       className={"page-header-menu"}
       theme={"dark"}
       mode="inline"
       onClick={handleClick}
-      selectedKeys={[window.location.pathname]}
-    >
-      {menus.map((item, index) => {
-        if (!MyLodashUtil.isEmpty(item.children)) {
-          return (
-            <SubMenu popupOffset={[-20, 5]} key={item.path} title={item.itemName}>
-              {item.children?.map((child) => {
-                return <Menu.Item key={child.path}>{child.itemName}</Menu.Item>;
-              })}
-            </SubMenu>
-          );
-        }
-        return <Menu.Item key={item.path}>{item.itemName}</Menu.Item>;
-      })}
-    </Menu>
+      selectedKeys={[location.pathname]}
+      openKeys={openKeys}
+      items={menus}
+      onOpenChange={(keys) => {
+        setOpenKeys(keys);
+      }}
+    ></Menu>
   );
 };
 
