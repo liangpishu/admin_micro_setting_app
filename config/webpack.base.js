@@ -29,17 +29,18 @@ module.exports = {
     }),
   ],
   module: {
-    rules: [{
-      test: /\.(js|jsx|ts|tsx|mjs)$/, // 使用正则来匹配js或jsx文件
-      exclude: /node_modules/, // 排除node_modules目录
-      use: {
-        loader: "babel-loader", // Babel加载器
-        options: {
-          cacheDirectory: true,
-          // cacheCompression: false,
+    rules: [
+      {
+        test: /\.(js|jsx|ts|tsx|mjs)$/, // 使用正则来匹配js或jsx文件
+        exclude: /node_modules/, // 排除node_modules目录
+        use: {
+          loader: "babel-loader", // Babel加载器
+          options: {
+            cacheDirectory: true,
+            // cacheCompression: false,
+          },
         },
       },
-    },
       {
         test: /\.css$/, // 匹配CSS文件
         use: ["style-loader", "css-loader", "postcss-loader"], // CSS加载器
@@ -68,6 +69,29 @@ module.exports = {
       "@types": path.resolve(appSrc, "desk/type"),
       "@form-components": path.resolve(appSrc, "desk/ui/component/antd/form"),
       "@components": path.resolve(appSrc, "desk/ui/component"),
+    },
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all", // all, async, initial
+      minSize: 0, // 最小尺寸，默认0
+      maxSize: 20000, // 最大尺寸，默认0
+      minChunks: 1, // 最小分割次数
+      maxAsyncRequests: 30, // 按需加载时并行请求的最大数目
+      maxInitialRequests: 30, // 一个入口点初始并行请求的最大数目
+      automaticNameDelimiter: "~", // 默认连接符，用于生成names
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
     },
   },
 };
